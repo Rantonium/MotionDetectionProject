@@ -1,0 +1,80 @@
+<html lang="en">
+   <head>
+      <title>Proiect SM</title>
+      <style>
+         body
+         {
+         max-width: 1000px;
+         margin: auto;
+         background-image: '{{url_for('static', filename='wall.jpg')}}';
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         background-position: center;
+         }
+         .slider {
+         -webkit-appearance: none;
+         width: 50%;
+         height: 15px;
+         border-radius: 5px;
+         background: #d3d3d3;
+         outline: none;
+         opacity: 0.7;
+         -webkit-transition: .2s;
+         transition: opacity .2s;
+         }
+         .slider:hover {
+         opacity: 1;
+         }
+         .slider::-webkit-slider-thumb {
+         -webkit-appearance: none;
+         appearance: none;
+         width: 25px;
+         height: 25px;
+         border-radius: 50%;
+         background: black;
+         cursor: pointer;
+         }
+         .slider::-moz-range-thumb {
+         width: 25px;
+         height: 25px;
+         border-radius: 50%;
+         background: #04AA6D;
+         cursor: pointer;
+         }
+         div {
+         border: 0 solid lightblue;
+         height: 100px;
+         padding: 10px 0;
+         display: flex;
+         justify-content: center;
+         }
+      </style>
+   </head>
+   <body background="{{ url_for('static',filename='wall.jpg') }}">
+      <div>
+         <h1 style="color:white">Mobile Angle Monitoring and Motion Detection System</h1>
+      </div>
+      <div style="min-height:300px">
+         <img src="{{ url_for('video_feed') }}" alt="Video Feed">
+      </div>
+      <form method="POST" action="/move_slider">
+         <div style="height:30px">
+            <input type="range" min="0" max="12" value="6" class="slider" id="myRange" name="myRange">
+         </div>
+         <br>
+         <div style="height:20px">
+            <input type="submit" value="Submit">
+         </div>
+         <br>
+      </form>
+      <script>
+         var rangeslider = document.getElementById("myRange");
+         var output = document.getElementById("demo");
+         output.innerHTML = rangeslider.value;
+
+         rangeslider.oninput = function() {
+           output.innerHTML = this.value;
+         }
+      </script>
+   </body>
+</html>
